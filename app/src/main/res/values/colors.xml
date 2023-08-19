@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Begin Color Material Design !-->
+<resources>
+    <color name="colorPrimary">#01baef</color>
+    <color name="colorPrimaryVariant">#01baef</color>
+    <color name="colorSecondry">#40AECD</color>
+    <color name="colorBackground">#CFCFD5</color>
+    <color name="colorSecondryVariant">#21D4F3</color>
+    <color name="colorSurface">#eeeeee</color>
+    <color name="colorOnPrimary">#fff</color>
+    <color name="colorError">#973232</color>
+    <color name="onSecondary">#000</color>
+    <color name="onBackground">#090707</color>
+    <color name="onSurface">#090404</color>
+</resources>
+
+    <!-- End Color Material Design !-->

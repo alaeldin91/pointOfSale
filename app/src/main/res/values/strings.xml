@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">PointOfSale</string>
+
+    <string name="title_app_bar">Point Of Sale</string>
+
+    <string name="selectTab">please Select Tab</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--Setting Tab and View Pager !-->
+    <string name="product"> ProductAll</string>
+
+    <string name="orders"> Orders </string>
+
+    <string name="settings">Settings</string>
+
+    <string name="productCart">Add Product In Cart</string>
+
+    <string name="logoDesc">this is  image</string>
+
+    <string name="addProduct">Add Product</string>
+
+    <string name="textInputNameProduct">Product Name</string>
+
+    <string name="textInputPrice">Price </string>
+
+    <string name="cancel">Cancel</string>
+
+    <string name="errorProductName">Please Fill your Product Name</string>
+
+    <string name="errorProductPrice">Please Fill your Product price</string>
+
+    <string name="Save">Save</string>
+    <string name="addCart">Add CART</string>
+    <string name="productName">Product Name</string>
+    <string name="price">Price</string>
+    <string name="quantity">Quantity</string>
+    <string name="tax">Tax</string>
+    <string name="discount">Discount</string>
+    <string name="subTotal">SubTotal</string>
+
+</resources>

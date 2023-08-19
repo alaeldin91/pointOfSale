@@ -1,0 +1,72 @@
+<!-- Root CoordinatorLayout for the entire activity -->
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+    <!-- AppBarLayout for the app bar -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Widget.MaterialComponents.ActionBar.Primary">
+        <!-- Toolbar for the app bar -->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary">
+            <!-- Relative layout for custom app bar content -->
+            <RelativeLayout
+                android:id="@+id/relativeToolBar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toTopOf="parent">
+                <!-- Logo image -->
+                <ImageView
+                    android:id="@+id/logo"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:contentDescription="@string/logoDesc"
+                    android:src="@drawable/baseline_point_of_sale_24"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+                <!-- Text in the app bar -->
+                <TextView
+                    android:id="@+id/textToolBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="@id/logo"
+                    android:layout_centerInParent="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/title_app_bar"
+                    android:textSize="@dimen/_15sdp"
+                    android:textStyle="bold"
+                    tools:ignore="RelativeOverlap" />
+                <!-- Shopping cart image -->
+                <ImageView
+                    android:id="@+id/shoppingCard"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_alignParentEnd="true"
+                    android:contentDescription="@string/logoDesc"
+                    android:src="@drawable/shopping_cart_black_24dp" />
+                <TextView
+                    android:layout_alignParentEnd="true"
+                    android:id="@+id/txtCount"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:layout_marginLeft="25dp"
+                    android:background="@drawable/circle"
+                    android:visibility="gone"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="@android:color/holo_red_light"
+                    android:textSize="10sp" />
+
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+    <!-- Include the content_main layout -->
+    <include layout="@layout/content_main" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
