@@ -127,9 +127,8 @@ public class ProductFragment extends Fragment implements ProductAdapter.onItemCl
      *                             #########################################################################################
      */
     public void clickListenerFlatButton(FloatingActionButton floatingActionButton) {
-        View view = inflateLayout(R.layout.addproduct);
         floatingActionButton.setOnClickListener(v -> {
-            createDialog(view);
+            createDialog(R.layout.addproduct);
             intilizeDialogAddProduct();
         });
 
@@ -160,12 +159,17 @@ public class ProductFragment extends Fragment implements ProductAdapter.onItemCl
      * the product name and price, along with buttons to save or cancel the operation.
      * If the associated Activity is not null, the dialog is initialized and shown.
      */
-    private void createDialog(View view) {
+    private void createDialog(int id) {
         Activity activity = getActivity();
         if (activity != null) {
             dialog = new Dialog(getActivity());
             WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-            handleDialog(lp, view);
+            if(R.layout.addproduct == id) {
+                handleDialog(lp);
+            }
+            else{
+                handleTempDialog(lp);
+            }
             // Initialize UI elements
 
         }
@@ -187,13 +191,13 @@ public class ProductFragment extends Fragment implements ProductAdapter.onItemCl
      * Initializes the temporary order table dialog by finding its close button
      * and setting up a click listener to dismiss the dialog when the button is clicked.
      */
-    public void initializeTempOrderTable() {
+   /** public void initializeTempOrderTable() {
         // Find the "Close" button in the temporary order table dialog
         ImageButton close = dialog.findViewById(R.id.close);
 
         // Set a click listener for the "Close" button to dismiss the dialog
         close.setOnClickListener(v -> dialog.dismiss());
-    }
+    }**/
 
     /**
      * Handles the click event of the "Save" button in the dialog for adding a new product.
@@ -325,17 +329,11 @@ public class ProductFragment extends Fragment implements ProductAdapter.onItemCl
                 // Show the dialog
                 .show();
     }
-
-    /**
-     * Configures and displays a dialog with the given layout parameters and content view.
-     *
-     * @param lp   The layout parameters for the dialog.
-     * @param view The content view of the dialog.
-     */
-    public void handleDialog(WindowManager.LayoutParams lp, View view) {
+    public void handleDialog(WindowManager.LayoutParams lp) {
         // Set up the dialog
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(true);
+        dialog.setContentView(R.layout.addproduct);
 
         // Copy attributes from the dialog's window and customize dimensions
         lp.copyFrom(Objects.requireNonNull(dialog.getWindow()).getAttributes());
@@ -343,12 +341,30 @@ public class ProductFragment extends Fragment implements ProductAdapter.onItemCl
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
 
         // Set the content view and show the dialog
-        dialog.setContentView(view);
         dialog.show();
 
         // Apply the updated attributes to the dialog's window
         dialog.getWindow().setAttributes(lp);
     }
+
+    public void handleTempDialog(WindowManager.LayoutParams lp) {
+        // Set up the dialog
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(true);
+        dialog.setContentView(R.layout.table_temp_order);
+
+        // Copy attributes from the dialog's window and customize dimensions
+        lp.copyFrom(Objects.requireNonNull(dialog.getWindow()).getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+
+        // Set the content view and show the dialog
+        dialog.show();
+
+        // Apply the updated attributes to the dialog's window
+        dialog.getWindow().setAttributes(lp);
+    }
+
 
     /**
      * Validates the entered product name and price fields.
@@ -473,10 +489,10 @@ public class ProductFragment extends Fragment implements ProductAdapter.onItemCl
         ImageView shoppingCart = getActivity().findViewById(R.id.shoppingCard);
         View view = inflateLayout(R.layout.table_temp_order);
         shoppingCart.setOnClickListener(v -> {
-            createDialog(view);
-            initializeTempOrderTable();
-            generateTableAutomaticlly(view);
-            handleGetAllTempOrders(view);
+            createDialog(R.layout.table_temp_order);
+          //  initializeTempOrderTable();
+            //generateTableAutomaticlly(view);
+           // handleGetAllTempOrders(view);
 
         });
     }
@@ -486,7 +502,7 @@ public class ProductFragment extends Fragment implements ProductAdapter.onItemCl
      *
      * @param view The root view containing the temporary order table.
      */
-    @SuppressLint("ResourceAsColor")
+  /**  @SuppressLint("ResourceAsColor")
     public void handleGetAllTempOrders(View view) {
         // Find the table layout view from the provided root view
         TableLayout tableLayout = view.findViewById(R.id.table_layout);
@@ -583,14 +599,14 @@ public class ProductFragment extends Fragment implements ProductAdapter.onItemCl
             // Center-align the table layout contents
             tableLayout.setGravity(Gravity.CENTER);
         });
-    }
+    }**/
 
     /**
      * Generates the automatic table header and adds it to the provided table layout.
      *
      * @param view The root view containing the table layout.
      */
-    public void generateTableAutomaticlly(View view) {
+    /**public void generateTableAutomaticlly(View view) {
         // Find the table layout view from the provided root view
         TableLayout tableLayout = view.findViewById(R.id.table_layout);
 
@@ -613,7 +629,7 @@ public class ProductFragment extends Fragment implements ProductAdapter.onItemCl
 
         // Add the header row to the table layout
         tableLayout.addView(headerRow);
-    }
+    }**/
 
     /**
      * Adds a header cell to the provided row in the table.
@@ -621,7 +637,7 @@ public class ProductFragment extends Fragment implements ProductAdapter.onItemCl
      * @param row  The TableRow to which the header cell should be added.
      * @param text The text content of the header cell.
      */
-    private void addHeaderCell(TableRow row, String text) {
+    /**private void addHeaderCell(TableRow row, String text) {
         // Create a TextView for the header cell
         TextView textView = new TextView(getActivity());
         textView.setText(text);
@@ -649,7 +665,7 @@ public class ProductFragment extends Fragment implements ProductAdapter.onItemCl
 
         // Add the header cell to the provided row
         row.addView(textView);
-    }
+    }**/
 
     /**
      * Adds a data cell to the provided row in the table.
@@ -657,7 +673,7 @@ public class ProductFragment extends Fragment implements ProductAdapter.onItemCl
      * @param row  The TableRow to which the data cell should be added.
      * @param text The text content of the data cell.
      */
-    private void addDataCell(TableRow row, String text) {
+    /**private void addDataCell(TableRow row, String text) {
         // Create a TextView for the data cell
         TextView textView = new TextView(getActivity());
         textView.setText(text);
@@ -683,7 +699,7 @@ public class ProductFragment extends Fragment implements ProductAdapter.onItemCl
 
         // Add the data cell to the provided row
         row.addView(textView);
-    }
+    }**/
 
 
     /**
@@ -698,7 +714,7 @@ public class ProductFragment extends Fragment implements ProductAdapter.onItemCl
      * @param subTotal    The subtotal of the order before tax and discount.
      * @param total       The total amount of the order including tax and discount.
      */
-    public void sendOrder(View view, String productName, double price, int quantity,
+    /**public void sendOrder(View view, String productName, double price, int quantity,
                           double tax, double discount, double subTotal, double total) {
         // Find the submit button in the view
         Button submit = view.findViewById(R.id.submit);
@@ -724,5 +740,5 @@ public class ProductFragment extends Fragment implements ProductAdapter.onItemCl
                 }
             });
         });
-    }
+    }**/
 }
