@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import com.example.pointofsale.ui.fragment.OrderHistoryFragment;
+import com.example.pointofsale.ui.fragment.OrderListFragment;
 import com.example.pointofsale.ui.fragment.ProductFragment;
 import com.example.pointofsale.ui.fragment.SettingFragment;
 

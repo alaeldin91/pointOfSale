@@ -19,7 +19,7 @@ import com.example.pointofsale.data.remote.model.TempOrder;
  * This class is annotated with @Database to define the database schema,
  * including entity classes and version.
  */
-@Database(entities = {Product.class, TempOrder.class, Order.class}, version = 17, exportSchema = false)
+@Database(entities = {Product.class, TempOrder.class, Order.class}, version = 24, exportSchema = false)
 public abstract class PointOfSaleDb extends RoomDatabase {
 
     /**

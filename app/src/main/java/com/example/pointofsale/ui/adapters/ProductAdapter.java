@@ -3,6 +3,7 @@ package com.example.pointofsale.ui.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import com.example.pointofsale.data.remote.model.Product;
 import com.example.pointofsale.databinding.ProductItemBinding;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolderProduct> {
     private final Context context;

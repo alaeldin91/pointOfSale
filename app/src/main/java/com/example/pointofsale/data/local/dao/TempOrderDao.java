@@ -4,10 +4,13 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 import com.example.pointofsale.data.remote.model.TempOrder;
 import java.util.List;
+
+import io.reactivex.rxjava3.core.Observable;
 
 /**
  * Data Access Object (DAO) interface for the 'tempOrder' database table.
@@ -21,7 +24,8 @@ public interface TempOrderDao {
      *
      * @param tempOrder The temporary order to be inserted.
      */
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+
     void insertTempOrder(TempOrder tempOrder);
 
     /**
@@ -63,7 +67,7 @@ public interface TempOrderDao {
      * @return A LiveData object containing a list of all temporary orders.
      */
     @Query("SELECT * FROM tempOrder")
-    LiveData<List<TempOrder>> getAllTempOrders();
+    Observable<List<TempOrder>> getAllTempOrders();
 
     /**
      * Delete a temporary order by its ID from the 'tempOrder' database table.

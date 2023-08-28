@@ -1,18 +1,28 @@
 package com.example.pointofsale.ui.viewmodel;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import com.example.pointofsale.data.remote.model.TempOrder;
 import com.example.pointofsale.data.remote.repository.TempOrderRepository;
 import java.util.List;
 import javax.inject.Inject;
 import dagger.hilt.android.lifecycle.HiltViewModel;
+import io.reactivex.rxjava3.core.Observable;
 
 /**
  * ViewModel class for managing temporary orders (shopping cart) related UI data.
  */
 @HiltViewModel
 public class TempOrderViewModel extends ViewModel {
+    private MutableLiveData<Double> discountLiveData = new MutableLiveData<>();
+    private MutableLiveData<Double> taxLiveData = new MutableLiveData<>();
+
+    private MutableLiveData<Double>  subTotalLiveData = new MutableLiveData<>();
+
+    private MutableLiveData<Double> totalLiveData = new MutableLiveData<>();
+
+    private MutableLiveData<Double> sumLiveData = new MutableLiveData<>();
 
     private final TempOrderRepository tempOrderRepository;
 
@@ -21,6 +31,10 @@ public class TempOrderViewModel extends ViewModel {
         this.tempOrderRepository = tempOrderRepository;
     }
 
+    public LiveData<Boolean> deleteTempOrder(int id){
+
+        return this.tempOrderRepository.deleteTempOrder(id);
+    }
     /**
      * Inserts a temporary order (shopping cart item) into the repository.
      *
@@ -55,7 +69,7 @@ public class TempOrderViewModel extends ViewModel {
      *
      * @return LiveData<List<TempOrder>> containing all temporary orders.
      */
-    public LiveData<List<TempOrder>> getTempOrders(){
+    public Observable<List<TempOrder>> getTempOrders(){
         return tempOrderRepository.getAllTempOrders();
     }
 
@@ -66,5 +80,55 @@ public class TempOrderViewModel extends ViewModel {
      */
     public void updateTempOrder(TempOrder tempOrder) {
         tempOrderRepository.updateTempOrder(tempOrder);
+    }
+
+    public LiveData<Double> getDiscountLiveData(){
+
+        return discountLiveData;
+    }
+
+    public LiveData<Double> getTaxLiveData(){
+        return taxLiveData;
+    }
+
+    public  LiveData<Double> getSubTotalLiveData(){
+        return subTotalLiveData;
+    }
+
+    public LiveData<Double> getTotal(){
+        return  totalLiveData;
+    }
+
+    public LiveData<Double>getSum(){
+
+        return sumLiveData;
+    }
+
+
+    public void calculateAndUpdateValues(List<TempOrder> tempOrders){
+        double discount = 0.0;
+        double tax = 0.0;
+        double total = 0.0;
+        double subTotal = 0.0;
+        double sum = 0.0;
+
+        for (TempOrder tempOrder : tempOrders){
+            double itemTotal = tempOrder.getSubTotal();
+            subTotal += itemTotal;
+            sum += itemTotal;
+             discount += tempOrder.getDiscount();
+             tax += tempOrder.getTax();
+             total = subTotal - discount;
+             if (tax !=0){
+             total += tax;
+         }
+         discountLiveData.setValue(discount);
+         taxLiveData.setValue(tax);
+         subTotalLiveData.setValue(subTotal);
+         totalLiveData.setValue(total);
+         sumLiveData.setValue(sum);
+
+        }
+
     }
 }

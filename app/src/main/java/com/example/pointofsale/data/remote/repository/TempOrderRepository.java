@@ -8,6 +8,10 @@ import com.example.pointofsale.data.remote.model.TempOrder;
 import java.util.List;
 import javax.inject.Inject;
 
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Scheduler;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+
 /**
  * Repository class that provides access to the temporary orders data.
  * Acts as an intermediary between data sources and the rest of the app.
@@ -21,6 +25,23 @@ public class TempOrderRepository {
         this.tempOrderDao = tempOrderDao;
     }
 
+
+    public LiveData<Boolean> deleteTempOrder(int id){
+        MutableLiveData<Boolean> deleteResult = new MutableLiveData<>();
+
+        try{
+            tempOrderDao.deleteTempOrderById(id);
+            deleteResult.setValue(true);
+
+        }
+        catch (Exception e){
+            deleteResult.setValue(false);
+            Log.e("Delete Error", "Error Delete data: " + e.getMessage());
+
+        }
+
+        return deleteResult;
+    }
     /**
      * Inserts a temporary order into the database.
      *
@@ -66,8 +87,8 @@ public class TempOrderRepository {
      *
      * @return LiveData<List<TempOrder>> containing all temporary orders.
      */
-    public LiveData<List<TempOrder>> getAllTempOrders(){
-        return tempOrderDao.getAllTempOrders();
+    public Observable<List<TempOrder>> getAllTempOrders(){
+        return tempOrderDao.getAllTempOrders().subscribeOn(Schedulers.io());
     }
 
     /**
